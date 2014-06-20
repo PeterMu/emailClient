@@ -1,0 +1,22 @@
+{
+    "Gmail" : {
+        "imap" : {
+            "host": "imap.gmail.com",
+            "port": 993
+        },    
+        "smtp" : {
+            "host": "smtp.gmail.com",
+            "port": 465
+        }
+    },
+    "QQ" : {
+        "imap" : {
+            "host" : "imap.qq.com",
+            "port": 993
+        },
+        "smtp" : {
+            "host" : "smtp.qq.com",
+            "port": 465
+        }
+    }
+}

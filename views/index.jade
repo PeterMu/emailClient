@@ -1,0 +1,85 @@
+extends ./common/layout
+block main
+    div#main
+        aside
+            div.email-nav
+                div.email-nav-header 
+                    div.email-type #{emailType} 
+                    button.pure-button.primary-button mukezhai
+                div.pure-menu.pure-menu-open
+                    ul
+                        li
+                            a
+                                i.fa.fa-inbox  Inbox(2)
+                        li
+                            a 
+                                i.fa.fa-send  Sent
+                        li
+                            a 
+                                i.fa.fa-file  Drafts 
+                        li
+                            a 
+                                i.fa.fa-circle-thin  NoSeen
+            div#email-contacts.email-contacts
+                div.contacts-search.pure-form
+                    input.pure-input-rounded(type='text', placeholder='Search...')
+                div#email-contacts-list
+        article.email-dialog
+            header
+                h3 PeterMu
+            section.item-from 
+                div.reply
+                    i.fa.fa-reply  
+                div.arrow-from
+                h5 测试呀测试呀测试
+                article.
+                    asdfa
+                    fasdf
+                    dafsd
+            section.item-to 
+                div.arrow-to
+                h5 测试呀测试呀测试
+                article.
+                    adfadf
+                    fasdfa
+                    sdfa
+            section.item-from 
+                div.reply
+                    i.fa.fa-reply  
+                div.arrow-from
+                h5 测试呀测试呀测试
+                article.
+                    asdfa
+                    fasdf
+                    dafsd
+            section.item-to 
+                div.arrow-to
+                article.
+                    adfadf
+                    fasdfa
+                    sdfa
+            footer.quick-reply
+                textarea(placeholder='Quick reply')
+                div.oper
+                    button.oper-button.pure-button Send
+                    button.oper-button.pure-button Save
+                    a(href='#') Open full reply form
+
+    textarea#contact-item-tpl.template 
+        |{{#.}}
+        li.contact-item
+            a.info
+                h4 {{name}}
+                div {{email}}
+        |{{/.}}
+
+    script.
+        seajs.use('/js/modules/index')
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+{
+  "name": "emailClient",
+  "version": "0.0.0",
+  "description": "mis using node",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:PeterMu/node_mis.git"
+  },
+  "keywords": [
+    "mis"
+  ],
+  "author": "Peter Mu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PeterMu/node_mis/issues"
+  },
+  "homepage": "https://github.com/PeterMu/node_mis",
+  "dependencies": {
+    "q": "^1.0.1",
+    "ejs": "^1.0.0",
+    "express": "^4.2.0",
+    "express-session": "^1.1.0",
+    "cookie-parser": "^1.1.0",
+    "mysql": "^2.3.0",
+    "poplib": "^0.1.7",
+    "nodemailer": "^0.6.5",
+    "imap": "^0.8.10",
+    "cookie-session": "^1.0.2",
+    "body-parser": "^1.3.1"
+  }
+}

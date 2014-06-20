@@ -1,0 +1,455 @@
+.template{
+    display: none;
+}
+.header{
+    width: 100%;
+    height: 50px;
+    background-color: #2d3e50;
+}
+.header .pure-menu-heading{
+   padding-left: 0; 
+}
+.header .pure-menu{
+    background-color: #2d3e50;
+    border-bottom: none;
+}
+.header .pure-menu a{
+    color: #6fbef3;
+    font-size: 1em;
+    line-height: 38px;
+}
+.header.pure-menu.pure-menu-open{
+    border-bottom: none;
+}
+.header .pure-menu a:hover{
+    background-color: #364b60;
+    color: #aecfe5;
+}
+.header .pure-menu .pure-menu-selected a{
+    color: white;
+    background-color: #364b60;
+}
+.header .pure-menu .pure-menu-heading{
+    color: white;
+}
+.header .drop-menu{
+    position: absolute;
+    top: 50px;
+    left: -203px;
+    width: 240px;
+    z-index: 5;
+    background-color: white;
+    display: none;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+    padding: 8px 20px;
+    padding-bottom: 15px;
+    overflow: hidden;
+    font-size: 14px;
+}
+.header .login-tool{
+    padding-top: 5px;
+    overflow: hidden;
+    text-align: left;
+}
+.header .login-tool .remmber{
+}
+.header .login-tool label{
+    display: inline; 
+    vertical-align:middle;
+}
+.header .login-tool input[type=checkbox]{
+    display: inline-block;
+    width: 14px;
+    vertical-align:middle;
+}
+.header .pure-form{
+    color: #777;
+    font-size: 14px;
+} 
+.header .pure-form label{
+    line-height: 20px;
+}
+.header .pure-form input{
+    width: 100%;
+}
+.header .drop-menu button{
+    width: 100%;
+}
+.header .has-drop-menu:hover a{
+   background-color: #364b60; 
+}
+.header .has-drop-menu:hover .drop-menu{
+    display: block;
+}
+.splash-container{
+    width: 100%;
+    height: 500px;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    background-color: #1f8dd6;
+    z-index: 1;
+}
+.splash{
+    text-align: center;
+}
+.splash h1{
+    color: white;
+    padding: 3em 4em;
+    font-size: 2em;
+    display: block;
+    border: 3px solid white;
+    border-radius: 5px;
+}
+.content-wrapper{
+    position: absolute;
+    top: 549px;
+    z-index: 2;
+    width: 100%;
+}
+
+.warn{
+    padding: 15px;
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border: 1px solid #faebcc;
+    border-radius: 4px;
+}
+.error{
+    padding: 15px;
+    color: #a94442;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    border-radius: 4px;
+}
+button.close{
+    float: right;
+    font-size: 21px;
+    line-height: 18px;
+    font-weight: bold;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .2;
+    filter:alpha(opacity=20);
+    border: 0;
+    padding: 0;
+    background: transparent;
+    vertical-align: top;
+}
+button.close:hover{
+    opacity: 0.5;
+}
+.button-error{
+    background: rgb(202, 60, 60);
+}
+.caret{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+.btn-group{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    width: 150px;
+}
+.btn-group .pure-menu{
+    position: absolute;
+    top: 30px;
+    display: none;
+    z-index: 5;
+}
+.btn-group:hover .pure-menu-open{
+    display:block;
+}
+.popover{
+    position: relative;
+    width: 300px;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    padding: 20px;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+.popover .arrow{
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    margin-left: -12px;
+    width: 0;
+    height: 0;
+    border-bottom: 12px solid rgba(0,0,0,0.25);
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+}
+.popover .arrow:after{
+    position: absolute;
+    top: 1px;
+    margin-left: -12px;
+    width: 0;
+    height: 0;
+    border-bottom: 12px solid #fff;
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+    content:"";
+}
+
+
+#main{
+    position:relative;
+    padding-left: 450px;
+}
+.email-nav{
+    position: fixed;
+    width: 150px;
+    top: 0;
+    left: 0;
+    height: 100%;
+    letter-spacing: normal;
+    background: rgb(37, 42, 58);
+    color: #fff;
+    text-align: center;
+}
+.email-nav-header{
+    padding: 0;
+    padding-bottom: 10px; 
+}
+.email-nav-header .email-type{
+   text-align: center;  
+   height: 35px;
+   background: rgb(55, 60, 90);
+   margin-bottom: 1em;
+   line-height: 2em;
+}
+.email-nav .pure-menu{
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-size: 90%;
+}
+.email-nav .pure-menu a{
+    color: #fff;
+}
+.email-nav .pure-menu a:hover{
+    background: rgb(55, 60, 90);
+}
+#email-contacts-list{
+    overflow-y: auto;
+    height: 100%;
+}
+.email-contacts{
+    position: fixed;
+    width: 300px;
+    top: 0;
+    left: 150px;
+    height: 100%;
+    border-right: solid 1px #ddd;
+    overflow: hidden;
+}
+.email-contacts .contacts-search{
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.email-contacts .contacts-search input{
+    padding: 5px;
+    width: 100%;
+    font-size: 85%;
+    color: #777;
+}
+.email-contacts ul{
+    padding: 0;
+    margin: 0;
+}
+.email-contacts li{
+    list-style: none;
+}
+.email-contacts .contact-item{
+    border-bottom: solid 1px #ddd;
+    padding: 16px;
+}
+.pure-g{
+    letter-spacing: normal;
+}
+.email-contacts .contact-item:hover{
+    background-color: #f8f8f8;
+}
+.email-contacts .contact-item.highlight{
+    background-color: #f8f8f8;
+    border-left: 3px solid #1b98f8;
+}
+.email-contacts .contact-item .info{
+    word-break: break-all;
+}
+.email-contacts .contact-item .oper{
+    padding: 0;
+    margin: 0;
+    background-color: #1b98f8;
+    height: 100%;
+    color: #fff;
+}
+.email-contacts .contact-item h4{
+    margin: 0;
+    margin-bottom: 0.2em;
+}
+.email-contacts .contact-item div{
+    color: #777;
+    font-size: 85%;
+}
+.email-dialog{
+    position: static;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    min-width: 700px;
+}
+.email-dialog header{
+    text-align: center;
+}
+
+.email-dialog h5{
+    margin: 0 0 1.5em 0;
+}
+.email-dialog .item-from{
+    background-color: #f0f0f0;
+    max-width: 60%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    position: relative;
+    top: 0;
+    left: 30px;
+    padding: 1.5em;
+}
+.email-dialog .quick-reply .oper{
+    padding: 10px 0;
+}
+.email-dialog .quick-reply .oper a{
+    font-size: 0.8em;
+    float: right;
+    margin-top: 8px;
+    text-decoration: none;
+    color: #4477bb;
+}
+.email-dialog .quick-reply .oper a:hover{
+    color: #c74747;
+    text-decoration:underline;
+}
+.email-dialog .quick-reply{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    border-top: 1px solid #e2e2e2;
+    background: #fcfcfc;
+    padding: 20px;
+    width: 100%;
+    max-height: 190px;
+}
+.email-dialog .quick-reply textarea{
+    -webkit-transition: height 300ms ease;
+    -moz-transition: height 300ms ease;
+    -o-transition: height 300ms ease;
+    transition: height 300ms ease;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #d7d7d7;
+    border-radius: 4px;
+    height: 50px;
+    width: 100%;
+    color: #000;
+    font-size: 11pt;
+    padding: 6px 8px;
+    resize: none;
+    box-shadow: none;
+}
+.email-dialog .reply{
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    color: #1b98f8;
+    cursor: pointer;
+    display: none;
+}
+.email-dialog .reply:hover{
+    color: blue;
+}
+.email-dialog .item-from:hover .reply{
+    display: block;
+}
+.email-dialog .arrow-from{
+    position: absolute;
+    bottom: 6px;
+    left: -21px;
+    width: 0;
+    height: 0;
+    border-right: 20px solid #ccc;
+    border-top: 20px solid transparent;
+}
+.email-dialog .arrow-from:after{
+    position: absolute;
+    bottom: 1px;
+    left: 2px;
+    width: 0;
+    height: 0;
+    border-right: 20px solid #f0f0f0;
+    border-top: 20px solid transparent;
+    content:"";
+}
+.email-dialog .item-to{
+    background-color: #fcfcfc;
+    max-width: 60%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    position: relative;
+    top: 0;
+    left: 40%;
+    margin-left: -85px;
+    padding: 1.5em;
+}
+.email-dialog .arrow-to{
+    position: absolute;
+    bottom: 6px;
+    right: -21px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid #e0e0e0;
+    border-top: 20px solid transparent;
+}
+.email-dialog .arrow-to:after{
+    position: absolute;
+    bottom: 1px;
+    right: 2px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid #fcfcfc;
+    border-top: 20px solid transparent;
+    content: "";
+}
+.primary-button{
+    color: #fff;
+    background: #1b98f8;
+    border-radius: 20px;
+}
+.oper-button{
+    border: 1px solid #ddd;
+    color: #fff;
+    padding: 0.5em 2em;
+    font-size: 80%;
+    border-radius: 20px;
+    background: #1b98f8;
+}
+
+
+
