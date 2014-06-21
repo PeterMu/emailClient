@@ -228,8 +228,13 @@ button.close:hover{
     text-align: center;  
     height: 35px;
     background: rgb(55, 60, 90);
-    margin-bottom: 1em;
     line-height: 2em;
+}
+.email-nav-header .email-name{
+    margin: 0;
+    height: 35px;
+    line-height: 2em;
+    border-bottom: solid 1px rgb(55, 60, 90)
 }
 .email-nav-header .signout{
     position: absolute;
@@ -324,6 +329,9 @@ button.close:hover{
     height: 100%;
     min-width: 700px;
 }
+.email-dialog article{
+    color: #777;
+}
 .email-dialog header{
     text-align: center;
 }
@@ -388,16 +396,21 @@ button.close:hover{
 }
 .email-dialog .reply{
     position: absolute;
-    top: 8px;
+    top: 5px;
     right: 10px;
     color: #1b98f8;
     cursor: pointer;
     display: none;
 }
-.email-dialog .reply:hover{
-    color: blue;
+.email-dialog .reply a{
+    font-size: 80%;
+    padding-left: 0.5em;
+    color: #1b98f8;
 }
-.email-dialog .item-from:hover .reply{
+.email-dialog .reply a:hover{
+    color: #0066cc;
+}
+.email-dialog section:hover .reply{
     display: block;
 }
 .email-dialog .arrow-from{
@@ -429,7 +442,7 @@ button.close:hover{
     top: 0;
     left: 40%;
     margin-left: -85px;
-    padding: 1.5em;
+    padding: 1em;
 }
 .email-dialog .arrow-to{
     position: absolute;
@@ -463,6 +476,29 @@ button.close:hover{
     border-radius: 20px;
     background: #1b98f8;
 }
-
-
-
+.signin-page{
+    background-image: url('/images/bg.jpg');
+    background-position: 0 15%;
+}
+.signin-container{
+    position: fixed; 
+    width: 27%;
+    height: 300px;
+    top: 25%;
+    left: 27%;
+}
+.signin-container input{
+    padding: 0.8em !important;
+    outline: 0;
+    outline-style: none;
+    box-shadow: none;
+}
+.signin-container h3,p{
+    color: #fff;
+}
+.signin-container button{
+    width: 100%;
+}
+input.input-error:focus{
+    border: 1px solid red !important;
+}

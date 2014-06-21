@@ -8,7 +8,8 @@ block main
                         div.signout
                             a(href='#')
                                 i.fa.fa-sign-out
-                    button.pure-button.primary-button mutiezhai 
+                    p.email-name #{email}                    
+                    button(style='margin-top:10px;font-size:80%;').pure-button.primary-button New Email  
                 div.pure-menu.pure-menu-open
                     ul
                         li
@@ -36,6 +37,8 @@ block main
                         i.fa.fa-reply  
                     a(href="#")
                         i.fa.fa-reply-all  
+                    a(href="#")
+                        i.fa.fa-share-square-o  
                 div.arrow-from
                 h5 测试呀测试呀测试
                 article.
@@ -43,6 +46,9 @@ block main
                     fasdf
                     dafsd
             section.item-to 
+                div.reply
+                    a(href="#")
+                        i.fa.fa-share-square-o  
                 div.arrow-to
                 h5 测试呀测试呀测试
                 article.
@@ -51,7 +57,10 @@ block main
                     sdfa
             section.item-from 
                 div.reply
-                    i.fa.fa-reply  
+                    a(href='#')
+                        i.fa.fa-reply  
+                    a(href="#")
+                        i.fa.fa-reply-all  
                 div.arrow-from
                 h5 测试呀测试呀测试
                 article.
@@ -59,6 +68,9 @@ block main
                     fasdf
                     dafsd
             section.item-to 
+                div.reply
+                    a(href="#")
+                        i.fa.fa-share-square-o  
                 div.arrow-to
                 article.
                     adfadf

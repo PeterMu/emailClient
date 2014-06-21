@@ -17,6 +17,7 @@ exports.init = (user, password, type) ->
         imapStore[user] = imap
         defer.resolve imap
     imap.once 'error',(err) ->
+        console.log err
         defer.reject err
     imap.once 'end',() ->
         imapStore[user] = null
