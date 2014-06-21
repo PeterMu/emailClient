@@ -4,6 +4,7 @@ define (require,exports,module) ->
         defaults:
             name: ''
             email: ''
+            show: true
         initialize : ()->
     models = Backbone.Collection.extend
         model: model

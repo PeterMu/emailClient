@@ -7,7 +7,16 @@
     ContactsView = require('../views/contactsView');
     app = Backbone.View.extend({
       initialize: function() {
-        return this.contactsView = new ContactsView;
+        this.contactsView = new ContactsView;
+        return $('.signout a').click(this.signout);
+      },
+      signout: function(e) {
+        e.preventDefault();
+        return $.post('/signout', function(data) {
+          if (data.success) {
+            return document.location.href = '/login';
+          }
+        });
       }
     });
     return new app;

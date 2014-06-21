@@ -224,11 +224,24 @@ button.close:hover{
     padding-bottom: 10px; 
 }
 .email-nav-header .email-type{
-   text-align: center;  
-   height: 35px;
-   background: rgb(55, 60, 90);
-   margin-bottom: 1em;
-   line-height: 2em;
+    position: relative;
+    text-align: center;  
+    height: 35px;
+    background: rgb(55, 60, 90);
+    margin-bottom: 1em;
+    line-height: 2em;
+}
+.email-nav-header .signout{
+    position: absolute;
+    top: 0;
+    right: 5px;
+    color: rgb(37,42,58);
+}
+.email-nav-header .signout a{
+    color: rgb(37,42,58);
+}
+.email-nav-header .email-type:hover .signout a{
+    color: #fff;
 }
 .email-nav .pure-menu{
     background: transparent;
@@ -327,7 +340,7 @@ button.close:hover{
     position: relative;
     top: 0;
     left: 30px;
-    padding: 1.5em;
+    padding: 1em;
 }
 .email-dialog .quick-reply .oper{
     padding: 10px 0;

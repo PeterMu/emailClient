@@ -24,12 +24,9 @@
       template: function(data) {
         return Mustache.render($('#contact-item-tpl').text(), data);
       },
-      render: function(data) {
+      render: function() {
         this.computeHeight();
-        if (!data) {
-          data = this.collection;
-        }
-        this.$el.html(this.template(data.toJSON()));
+        this.$el.html(this.template(this.collection.toJSON()));
         return this;
       },
       computeHeight: function() {
@@ -45,20 +42,32 @@
       search: function() {
         var e, results, value;
         e = window.event || arguments[0];
-        value = $(e.target || e.srcElement).val();
+        value = $(e.target || e.srcElement).val().toUpperCase();
         if (value === '') {
-          this.render();
+          results = this.collection.where({
+            show: false
+          });
+          results.forEach(function(ele) {
+            return ele.set({
+              show: true
+            });
+          });
         } else {
-          results = this.collection.select(function(model) {
-            if (model.get('name').indexOf(value) > -1) {
-              return true;
+          this.collection.forEach(function(ele) {
+            if (ele.get('name').toUpperCase().indexOf(value) === -1) {
+              return ele.set({
+                show: false,
+                silent: true
+              });
             } else {
-              return false;
+              return ele.set({
+                show: true,
+                silent: true
+              });
             }
           });
         }
-        console.log(results);
-        return this.render(results);
+        return this.render();
       }
     });
   });

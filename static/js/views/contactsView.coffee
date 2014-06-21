@@ -15,10 +15,9 @@ define (require, exports, module) ->
                 that.search.call that
         template: (data)->
             return Mustache.render($('#contact-item-tpl').text(), data)
-        render: (data) ->
+        render: () ->
             this.computeHeight()
-            if not data then data = this.collection
-            this.$el.html this.template data.toJSON()
+            this.$el.html this.template this.collection.toJSON()
             return this
         computeHeight: () ->
             height = $(window).outerHeight() - this.$el.parent().find('.contacts-search').outerHeight()
@@ -29,14 +28,22 @@ define (require, exports, module) ->
                 that.$el.height height
         search: ()->
             e = window.event||arguments[0]
-            value = $(e.target||e.srcElement).val()
+            value = $(e.target||e.srcElement).val().toUpperCase()
             if value is ''
-                this.render()
+                results = this.collection.where show:false
+                results.forEach (ele) ->
+                    ele.set show: true
             else
-                results = this.collection.select (model) ->
-                    if model.get('name').indexOf(value) >-1
-                        return true
+                this.collection.forEach (ele) ->
+                    if ele.get('name').toUpperCase().indexOf(value) is -1
+                        ele.set show:false,silent: true
                     else
-                        return false
-            console.log results
-            this.render results
+                        ele.set show:true,silent: true
+            this.render()
+
+
+
+
+
+
+

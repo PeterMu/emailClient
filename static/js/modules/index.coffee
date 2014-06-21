@@ -5,6 +5,12 @@ define (require, exports, module) ->
     app = Backbone.View.extend
         initialize: () ->
             this.contactsView = new ContactsView
+            $('.signout a').click this.signout
+        signout: (e) ->
+            e.preventDefault()
+            $.post '/signout',(data) ->
+                if data.success
+                    document.location.href = '/login'
 
     new app
 

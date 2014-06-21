@@ -3,6 +3,7 @@ express = require 'express'
 jade = require 'jade'
 session = require 'cookie-session'
 bodyParser = require 'body-parser'
+auth = require './services/auth'
 app = express()
 
 
@@ -11,11 +12,15 @@ app.use bodyParser.urlencoded()
 app.use bodyParser.json()
 app.use bodyParser.json type: 'application/vnd.api+json'
 #session
-app.use session keys: ['key1', 'key2']
+app.use session keys: ['peter', 'dnspod']
 
 #view engine
 app.set 'view engine','jade'
 app.use express.static  __dirname + '/static'
+
+#auth
+app.use auth.loginAuth
+
 #routes
 routes = require './routes'
 routes app

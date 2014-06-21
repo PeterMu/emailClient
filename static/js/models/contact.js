@@ -6,7 +6,8 @@
     model = Backbone.Model.extend({
       defaults: {
         name: '',
-        email: ''
+        email: '',
+        show: true
       },
       initialize: function() {}
     });

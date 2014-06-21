@@ -5,7 +5,10 @@ block main
             div.email-nav
                 div.email-nav-header 
                     div.email-type #{emailType} 
-                    button.pure-button.primary-button mukezhai
+                        div.signout
+                            a(href='#')
+                                i.fa.fa-sign-out
+                    button.pure-button.primary-button mutiezhai 
                 div.pure-menu.pure-menu-open
                     ul
                         li
@@ -29,7 +32,10 @@ block main
                 h3 PeterMu
             section.item-from 
                 div.reply
-                    i.fa.fa-reply  
+                    a(href='#')
+                        i.fa.fa-reply  
+                    a(href="#")
+                        i.fa.fa-reply-all  
                 div.arrow-from
                 h5 测试呀测试呀测试
                 article.
@@ -67,10 +73,12 @@ block main
 
     textarea#contact-item-tpl.template 
         |{{#.}}
+        |{{#show}}
         li.contact-item
             a.info
                 h4 {{name}}
                 div {{email}}
+        |{{/show}}
         |{{/.}}
 
     script.
