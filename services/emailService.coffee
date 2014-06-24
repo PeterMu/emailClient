@@ -96,7 +96,7 @@ exports.getSentEmail = (user, to, limit) ->
     defer = Q.defer()
     imap = ImapStore.getImap user
     openInbox = (cb) ->
-        imap.openBox 'Sent Items',true,cb
+        imap.openBox '[Gmail]/Sent Mail',true,cb
     openInbox (err,box) ->
         if err
             defer.resolve []
