@@ -27,7 +27,7 @@ routes app
 
 #catch uncaughtException
 process.on 'uncaughtException', (err) ->
-    console.log err
+    console.log 'uncaughtException: '+err
 
 http.createServer app
 .listen 8080,()->console.log 'server start...'

@@ -5,7 +5,7 @@ exports.render = (req, res) ->
     email = req.session.user
     email = email.substring 0, email.lastIndexOf '@'
     if email.length >10
-        email = email.substring 0, 8
+        email = email.substring 0,10
         email = email + '...'
     res.render 'index', title: 'Index',emailType:req.session.emailType,email:email
 

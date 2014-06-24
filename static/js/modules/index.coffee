@@ -7,7 +7,7 @@ define (require, exports, module) ->
         initialize: () ->
             this.contactsView = new ContactsView
             this.dialogView = new DialogView
-            this.dialogView.pullData 'from', 'noreply@dajie.com'
+            this.dialogView.pullData 'from', 'mutiezhai@gmail.com'
             $('.signout a').click this.signout
         signout: (e) ->
             e.preventDefault()

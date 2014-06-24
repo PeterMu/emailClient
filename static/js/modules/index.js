@@ -10,7 +10,7 @@
       initialize: function() {
         this.contactsView = new ContactsView;
         this.dialogView = new DialogView;
-        this.dialogView.pullData('from', 'noreply@dajie.com');
+        this.dialogView.pullData('from', 'mutiezhai@gmail.com');
         return $('.signout a').click(this.signout);
       },
       signout: function(e) {

@@ -22,10 +22,14 @@
         fa = this.$('.show-more').find('.fa');
         if (fa.hasClass('fa-angle-down')) {
           fa.removeClass('fa-angle-down').addClass('fa-angle-up');
-          return this.$('.dialog-article').height('100%');
+          return this.$('.dialog-article').css({
+            'max-height': '100%'
+          });
         } else {
           fa.removeClass('fa-angle-up').addClass('fa-angle-down');
-          return this.$('.dialog-article').height('200px');
+          return this.$('.dialog-article').css({
+            'max-height': '200px'
+          });
         }
       }
     });

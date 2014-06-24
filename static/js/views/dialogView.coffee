@@ -16,10 +16,10 @@ define (require,exports, module)->
             fa = this.$('.show-more').find '.fa'
             if fa.hasClass 'fa-angle-down'
                 fa.removeClass('fa-angle-down').addClass('fa-angle-up')
-                this.$('.dialog-article').height('100%')
+                this.$('.dialog-article').css 'max-height':'100%'
             else
                 fa.removeClass('fa-angle-up').addClass('fa-angle-down')
-                this.$('.dialog-article').height('200px')
+                this.$('.dialog-article').css 'max-height':'200px'
 
 
     module.exports = Backbone.View.extend

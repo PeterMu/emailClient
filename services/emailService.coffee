@@ -14,8 +14,8 @@ exports.getContacts = (user) ->
         if err
             throw err
         start = 0
-        if box.messages.total > 100
-            start = box.messages.total-100
+        if box.messages.total > 200
+            start = box.messages.total-200
         else
             start = 1
         f = imap.seq.fetch start+':'+box.messages.total,bodies:'HEADER.FIELDS (FROM)',struct:true
@@ -39,79 +39,118 @@ exports.getUnseenEmail = (user, from, limit) ->
         imap.openBox 'INBOX',true,cb
     openInbox (err,box) ->
         if err
-            throw err
+            defer.resolve []
         imap.seq.search ['UNSEEN',['FROM', from]], (err, results) ->
-            throw err if err
+            if err
+                defer.resolve []
             array = []
             results = results.slice 0-limit
-            f = imap.seq.fetch results, bodies:'',markSeen: true
-            f.on 'message', (msg, seqNo) ->
-                mailParser = new MailParser defaultCharset:'utf8'
-                mailParser.on 'end', (mail) ->
-                    array.push mail
-                msg.on 'body', (stream, info)->
-                    stream.pipe mailParser
-            f.on 'error', (err) ->
-                console.log err
+            if results.length > 0
+                f = imap.seq.fetch results, bodies:'',markSeen: true
+                f.on 'message', (msg, seqNo) ->
+                    mailParser = new MailParser defaultCharset:'utf8'
+                    mailParser.on 'end', (mail) ->
+                        array.push mail
+                    msg.on 'body', (stream, info)->
+                        stream.pipe mailParser
+                f.on 'error', (err) ->
+                    console.log err
+                    defer.resolve []
+                f.once 'end', ()->
+                    defer.resolve array
+            else
                 defer.resolve []
-            f.once 'end', ()->
-                defer.resolve array
+    return defer.promise
+
+exports.getInboxEmail = (user, from, limit) ->
+    defer = Q.defer()
+    imap = ImapStore.getImap user
+    openInbox = (cb) ->
+        imap.openBox 'INBOX',true,cb
+    openInbox (err,box) ->
+        if err
+            defer.resolve []
+        imap.seq.search ['ALL',['FROM', from]], (err, results) ->
+            if err
+                defer.resolve []
+            array = []
+            results = results.slice 0-limit
+            if results.length > 0
+                f = imap.seq.fetch results, bodies:'',markSeen: true
+                f.on 'message', (msg, seqNo) ->
+                    mailParser = new MailParser defaultCharset:'utf8'
+                    mailParser.on 'end', (mail) ->
+                        array.push mail
+                    msg.on 'body', (stream, info)->
+                        stream.pipe mailParser
+                f.on 'error', (err) ->
+                    console.log err
+                    defer.resolve []
+                f.once 'end', ()->
+                    defer.resolve array
+            else
+                defer.resolve []
     return defer.promise
                 
 exports.getSentEmail = (user, to, limit) ->
     defer = Q.defer()
     imap = ImapStore.getImap user
     openInbox = (cb) ->
-        imap.openBox 'Sent Mail',true,cb
+        imap.openBox 'Sent Items',true,cb
     openInbox (err,box) ->
         if err
-            throw err
+            defer.resolve []
         imap.seq.search ['ALL',['TO', to]], (err, results) ->
-            throw err if err
+            if err
+                defer.resolve []
             array = []
             results = results.slice 0-limit
-            f = imap.seq.fetch results, bodies:'',markSeen: true
-            f.on 'message', (msg, seqNo) ->
-                mailParser = new MailParser defaultCharset:'utf8'
-                mailParser.on 'end', (mail) ->
-                    array.push mail
-            f.on 'err', (err) ->
-                console.log err
-                defer.resolve []
+            if results.length > 0
+                f = imap.seq.fetch results, bodies:''
+                f.on 'message', (msg, seqNo) ->
+                    mailParser = new MailParser defaultCharset:'utf8'
+                    mailParser.on 'end', (mail) ->
+                        array.push mail
+                        console.log mail.subject
+                    msg.on 'body', (stream, info)->
+                        stream.pipe mailParser
+                f.on 'error', (err) ->
+                    console.log err
+                    defer.resolve []
 
-            f.once 'end', ()->
+                f.once 'end', ()->
+                    defer.resolve array
+            else
                 defer.resolve array
-    return defer
+    return defer.promise
 
 exports.getDialog = (user, address, limit) ->
-    unseenArray = null
+    inboxArray = null
     sentArray = null
     topDefer = Q.defer()
-    exports.getUnseenEmail user, address, limit
+    exports.getInboxEmail user, address, limit
     .then (mails)->
         defer = Q.defer()
-        unseenArray = mails
+        inboxArray = mails
         defer.resolve()
-        console.log 'unseen='+unseenArray.length
         return defer.promise
     .then ()->
         defer = Q.defer()
         exports.getSentEmail user, address, limit
-            .then (mails) ->
-                sentArray = mails
-                defer.resolve()
-                console.log 'sent='+sentArray.length
+        .then (mails)->
+            sentArray = mails
+            defer.resolve()
         return defer.promise
     .then ()->
-        topDefer.resolve concatUnseenAndSent unseenArray, sentArray
+        topDefer.resolve concatInboxAndSent inboxArray, sentArray
     return topDefer.promise
 #concat unseen box and sent box, and sory by data
-concatUnseenAndSent = (unseen, sent)->
-    unseen.forEach (mail)->
+concatInboxAndSent = (inbox, sent)->
+    inbox.forEach (mail)->
         mail.type = 'from'
     sent.forEach (mail)->
         mail.type = 'to'
-    array = unseen.concat sent
+    array = inbox.concat sent
     return array.sort (i,j)->
         return i.date.getTime() > j.date.getTime()
 
