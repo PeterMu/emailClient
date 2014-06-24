@@ -8,3 +8,5 @@ module.exports = (app) ->
     app.post '/login', UserController.login
     app.post '/signout', UserController.signout
     app.get '/contacts', EmailController.getContacts
+    app.get '/unseen/:address', EmailController.getUnseenEmail
+    #app.get '/sent', EmailController.getSentEmail

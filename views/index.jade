@@ -31,51 +31,51 @@ block main
         article.email-dialog
             header
                 h3 PeterMu
-            section.item-from 
-                div.reply
-                    a(href='#')
-                        i.fa.fa-reply  
-                    a(href="#")
-                        i.fa.fa-reply-all  
-                    a(href="#")
-                        i.fa.fa-share-square-o  
-                div.arrow-from
-                h5 测试呀测试呀测试
-                article.
-                    asdfa
-                    fasdf
-                    dafsd
-            section.item-to 
-                div.reply
-                    a(href="#")
-                        i.fa.fa-share-square-o  
-                div.arrow-to
-                h5 测试呀测试呀测试
-                article.
-                    adfadf
-                    fasdfa
-                    sdfa
-            section.item-from 
-                div.reply
-                    a(href='#')
-                        i.fa.fa-reply  
-                    a(href="#")
-                        i.fa.fa-reply-all  
-                div.arrow-from
-                h5 测试呀测试呀测试
-                article.
-                    asdfa
-                    fasdf
-                    dafsd
-            section.item-to 
-                div.reply
-                    a(href="#")
-                        i.fa.fa-share-square-o  
-                div.arrow-to
-                article.
-                    adfadf
-                    fasdfa
-                    sdfa
+            div#dialog-list
+                section.item-from
+                    div.arrow-from
+                    div.reply
+                        a(href='#')
+                            i.fa.fa-reply  
+                        a(href="#")
+                            i.fa.fa-reply-all  
+                        a(href="#")
+                            i.fa.fa-share-square-o  
+                    h4 subject 
+                    article
+                        p test
+                        p test
+                        p test
+                        p test
+                        p test
+                        p test
+                        p test
+                        p test
+                        p test
+                        p test
+                        p test
+                        p test
+                    div.show-more
+                        i.fa.fa-angle-down
+                section.item-to 
+                    div.reply
+                        a(href="#")
+                            i.fa.fa-share-square-o  
+                    div.arrow-to
+                    h4 测试呀测试呀测试
+                    article.
+                        adfadf
+                        fasdfa
+                        sdfa
+                section.item-to 
+                    div.reply
+                        a(href="#")
+                            i.fa.fa-share-square-o  
+                    div.arrow-to
+                    article.
+                        adfadf
+                        fasdfa
+                        sdfa
             footer.quick-reply
                 textarea(placeholder='Quick reply')
                 div.oper
@@ -93,6 +93,20 @@ block main
         |{{/show}}
         |{{/.}}
 
+    textarea#dialog-from-tpl.template 
+        section.item-from
+            div.reply
+                a(href='#')
+                    i.fa.fa-reply  
+                a(href="#")
+                    i.fa.fa-reply-all  
+                a(href="#")
+                    i.fa.fa-share-square-o  
+            div.arrow-from
+            h4 {{subject}} 
+            article.dialog-article {{&html}}
+            div.show-more
+                i.fa.fa-angle-down
     script.
         seajs.use('/js/modules/index')
 
