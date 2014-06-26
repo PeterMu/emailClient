@@ -22,13 +22,13 @@ define (require, exports, module) ->
                 if data.success
                     document.location.href = '/login'
         computeSize: () ->
-            height = $(window).outerHeight() - 100
+            height = $(window).outerHeight() - 120
             width = $('#dialog-list').outerWidth()
             $('#dialog-list').height height
             $('.email-dialog').find('.quick-reply').outerWidth width
             console.log width
             $(window).resize ()->
-                height = $(window).outerHeight()-100
+                height = $(window).outerHeight()-120
                 width = $('#dialog-list').outerWidth()
                 $('#dialog-list').height height
                 $('.email-dialog').find('.quick-reply').outerWidth width

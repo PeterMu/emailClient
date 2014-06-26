@@ -16,6 +16,7 @@ define (require, exports, module) ->
             this.$el.parent().find('li').removeClass 'highlight'
             this.$('li').addClass 'highlight'
             this.model.collection.trigger 'loadDialog',this.model.get 'email'
+            $('.dialog-header').text this.model.get 'name'
 
     module.exports = Backbone.View.extend
         el: $('#email-contacts-list')

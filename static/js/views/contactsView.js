@@ -20,7 +20,8 @@
       loadDialog: function() {
         this.$el.parent().find('li').removeClass('highlight');
         this.$('li').addClass('highlight');
-        return this.model.collection.trigger('loadDialog', this.model.get('email'));
+        this.model.collection.trigger('loadDialog', this.model.get('email'));
+        return $('.dialog-header').text(this.model.get('name'));
       }
     });
     return module.exports = Backbone.View.extend({

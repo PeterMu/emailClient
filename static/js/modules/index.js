@@ -34,13 +34,13 @@
       },
       computeSize: function() {
         var height, width;
-        height = $(window).outerHeight() - 100;
+        height = $(window).outerHeight() - 120;
         width = $('#dialog-list').outerWidth();
         $('#dialog-list').height(height);
         $('.email-dialog').find('.quick-reply').outerWidth(width);
         console.log(width);
         return $(window).resize(function() {
-          height = $(window).outerHeight() - 100;
+          height = $(window).outerHeight() - 120;
           width = $('#dialog-list').outerWidth();
           $('#dialog-list').height(height);
           return $('.email-dialog').find('.quick-reply').outerWidth(width);
