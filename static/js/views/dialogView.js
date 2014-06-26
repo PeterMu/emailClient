@@ -11,10 +11,23 @@
         'click .show-more': 'showMore'
       },
       template: function() {
-        return Mustache.render($('#dialog-from-tpl').text(), this.model.toJSON());
+        if (this.model.get('type') === 'from') {
+          return Mustache.render($('#dialog-from-tpl').text(), this.model.toJSON());
+        } else {
+          return Mustache.render($('#dialog-to-tpl').text(), this.model.toJSON());
+        }
       },
       render: function() {
+        var width;
         this.$el.html(this.template());
+        if (this.model.get('type') === 'to') {
+          width = $(window).outerWidth() - 1320;
+          if (width < 0) {
+            this.$('.item-to').css('left', '30px');
+          } else {
+            this.$('.item-to').css('left', width);
+          }
+        }
         return this;
       },
       showMore: function() {
@@ -39,8 +52,13 @@
         'click h4': this.test
       },
       initialize: function() {
+        var that;
+        that = this;
         this.collection = new Dialog.collection;
-        return this.collection.on('reset', this.renderAll, this);
+        this.collection.on('reset', this.renderAll, this);
+        return this.on('loadDialog', function(address) {
+          return that.pullData(address);
+        });
       },
       renderOne: function(model) {
         var item;
@@ -50,10 +68,11 @@
         return this.$el.append(item.render().el);
       },
       renderAll: function() {
+        this.$el.children().remove();
         return this.collection.each(this.renderOne, this);
       },
-      pullData: function(type, address) {
-        return this.collection.pull(type, address);
+      pullData: function(address) {
+        return this.collection.pull(address);
       }
     });
   });

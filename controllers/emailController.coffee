@@ -15,6 +15,13 @@ exports.getContacts = (req, res) ->
            res.json contacts
 
 exports.getUnseenEmail = (req, res) ->
+    EmailService.getUnseenEmail req.session.user, 5
+        .then (mails)->
+            res.json mails
+        .then (err) ->
+            res.json ''
+
+exports.getDialog = (req, res)->
     EmailService.getDialog req.session.user, req.params.address, 5
         .then (mails)->
             res.json mails

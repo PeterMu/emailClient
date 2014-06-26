@@ -7,7 +7,8 @@
       defaults: {
         name: '',
         email: '',
-        show: true
+        show: true,
+        haveUnseen: false
       },
       initialize: function() {}
     });
@@ -16,7 +17,7 @@
       url: '/contacts'
     });
     exports.model = model;
-    exports.models = models;
+    exports.collection = models;
     return exports;
   });
 

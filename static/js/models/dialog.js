@@ -13,18 +13,11 @@
     });
     exports.collection = Backbone.Collection.extend({
       model: exports.model,
-      pull: function(type, address) {
-        if (type === 'from') {
-          return this.fetch({
-            url: '/unseen/' + address,
-            reset: true
-          });
-        } else {
-          return this.fetch({
-            url: '/sent/' + address,
-            reset: true
-          });
-        }
+      pull: function(address) {
+        return this.fetch({
+          url: '/dialog/' + address,
+          reset: true
+        });
       }
     });
     return exports;

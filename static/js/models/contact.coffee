@@ -5,11 +5,12 @@ define (require,exports,module) ->
             name: ''
             email: ''
             show: true
+            haveUnseen: false
         initialize : ()->
     models = Backbone.Collection.extend
         model: model
         url: '/contacts'
 
     exports.model = model
-    exports.models = models
+    exports.collection = models
     return exports

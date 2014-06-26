@@ -8,11 +8,8 @@ define (require, exports, module)->
             contentType: 'text'
     exports.collection = Backbone.Collection.extend
         model: exports.model
-        pull: (type,address)->
-            if type is 'from'
-                this.fetch url: '/unseen/' + address, reset: true
-            else
-                this.fetch url: '/sent/' + address, reset: true
+        pull: (address)->
+            this.fetch url: '/dialog/' + address, reset: true
 
     return exports
 
