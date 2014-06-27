@@ -17,12 +17,7 @@
         this.contactsView.collection.on('loadDialog', function(address) {
           return that.dialogView.trigger('loadDialog', address);
         });
-        return $(function() {
-          that.computeSize();
-          return $('.quick-reply input').focus(function(e) {
-            return $(this).parent().css('bottom', '-20px');
-          });
-        });
+        return this.initQuickReply();
       },
       signout: function(e) {
         e.preventDefault();
@@ -38,12 +33,49 @@
         width = $('#dialog-list').outerWidth();
         $('#dialog-list').height(height);
         $('.email-dialog').find('.quick-reply').outerWidth(width);
-        console.log(width);
         return $(window).resize(function() {
           height = $(window).outerHeight() - 120;
           width = $('#dialog-list').outerWidth();
           $('#dialog-list').height(height);
           return $('.email-dialog').find('.quick-reply').outerWidth(width);
+        });
+      },
+      initQuickReply: function() {
+        var that;
+        that = this;
+        return $(function() {
+          var $reply;
+          that.computeSize();
+          $reply = $('.quick-reply');
+          $reply.find('input').focus(function(e) {
+            return $(this).parent().css('bottom', '-20px');
+          });
+          return $reply.find('.oper button[name=send]').click(function() {
+            var content, email, title;
+            title = $reply.find('input').val();
+            content = $reply.find('textarea').val();
+            email = $('.dialog-header').data('email');
+            if (content === '') {
+              return;
+            }
+            return $.ajax({
+              url: '/send',
+              dataType: 'json',
+              type: 'post',
+              data: {
+                subject: title,
+                to: email,
+                text: content,
+                html: ''
+              },
+              success: function(data) {
+                return console.log(data);
+              },
+              error: function(err) {
+                return console.log(err);
+              }
+            });
+          });
         });
       }
     });

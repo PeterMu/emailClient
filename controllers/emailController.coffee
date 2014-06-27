@@ -27,3 +27,14 @@ exports.getDialog = (req, res)->
             res.json mails
         .then (err) ->
             res.json ''
+
+exports.sendMail = (req, res)->
+    mail = {}
+    mail.to = req.body.to
+    mail.subject = req.body.subject
+    mail.text = req.body.text
+    mail.html = req.body.html
+    EmailService.sendMail req.session.user, req.session.password,mail
+    .then (result)->
+        console.log 'res: '+result
+        res.json result

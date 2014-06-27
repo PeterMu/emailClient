@@ -10,3 +10,4 @@ module.exports = (app) ->
     app.get '/contacts', EmailController.getContacts
     app.get '/unseen', EmailController.getUnseenEmail
     app.get '/dialog/:address', EmailController.getDialog
+    app.post '/send', EmailController.sendMail

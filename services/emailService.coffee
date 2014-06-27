@@ -3,6 +3,7 @@ Imap = require 'imap'
 ImapStore = require './imapStore'
 ImapUtil = require './imapUtil'
 MailParser = require('mailparser').MailParser
+NodeMailer = require 'nodemailer'
 
 exports.getContacts = (user) ->
     defer = Q.defer()
@@ -156,8 +157,29 @@ concatInboxAndSent = (inbox, sent)->
     return array.sort (i,j)->
         return i.date.getTime() > j.date.getTime()
 
-
-
+exports.sendMail = (user, password, mail)->
+    console.log 'call send mail'
+    defer = Q.defer()
+    smtpTransport = NodeMailer.createTransport 'SMTP',
+        service: 'Gmail'
+        auth:
+            user: user
+            pass: password
+    mailOptions =
+        from: user
+        to: mail.to
+        subject: mail.subject
+        text: mail.text
+        html: ''
+    smtpTransport.sendMail mailOptions, (error, response)->
+        if error
+            console.log error
+            defer.resolve error: error
+        else
+            console.log 'send response: '+response.message
+            defer.resolve message: response.message
+        smtpTransport.close()
+    return defer.promise
 
 
 

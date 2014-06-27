@@ -12,10 +12,7 @@ define (require, exports, module) ->
             $('.signout a').click this.signout
             this.contactsView.collection.on 'loadDialog',(address)->
                 that.dialogView.trigger 'loadDialog', address
-            $ ()->
-                that.computeSize()
-                $('.quick-reply input').focus (e)->
-                    $(this).parent().css('bottom','-20px')
+            this.initQuickReply()
         signout: (e) ->
             e.preventDefault()
             $.post '/signout',(data) ->
@@ -26,11 +23,40 @@ define (require, exports, module) ->
             width = $('#dialog-list').outerWidth()
             $('#dialog-list').height height
             $('.email-dialog').find('.quick-reply').outerWidth width
-            console.log width
             $(window).resize ()->
                 height = $(window).outerHeight()-120
                 width = $('#dialog-list').outerWidth()
                 $('#dialog-list').height height
                 $('.email-dialog').find('.quick-reply').outerWidth width
+        initQuickReply: ()->
+            that = this
+            $ ()->
+                that.computeSize()
+                $reply = $('.quick-reply')
+                $reply.find('input').focus (e)->
+                    $(this).parent().css('bottom','-20px')
+                $reply.find('.oper button[name=send]').click ()->
+                    title = $reply.find('input').val()
+                    content = $reply.find('textarea').val()
+                    email = $('.dialog-header').data 'email'
+                    if content is ''
+                        return
+                    $.ajax
+                        url: '/send'
+                        dataType: 'json'
+                        type: 'post'
+                        data:
+                            subject: title
+                            to: email
+                            text: content
+                            html: ''
+                        success: (data)->
+                            console.log data
+                        error: (err)->
+                            console.log err
     new app
+
+
+
+
 

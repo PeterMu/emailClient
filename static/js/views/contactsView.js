@@ -19,9 +19,9 @@
       },
       loadDialog: function() {
         this.$el.parent().find('li').removeClass('highlight');
-        this.$('li').addClass('highlight');
         this.model.collection.trigger('loadDialog', this.model.get('email'));
-        return $('.dialog-header').text(this.model.get('name'));
+        $('.dialog-header').text(this.model.get('name'));
+        return $('.dialog-header').data('email', this.model.get('email'));
       }
     });
     return module.exports = Backbone.View.extend({
