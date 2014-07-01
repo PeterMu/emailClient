@@ -50,14 +50,23 @@
           $reply.find('input').focus(function(e) {
             return $(this).parent().css('bottom', '-20px');
           });
+          $reply.find('.oper button[name=hide]').click(function() {
+            return $reply.css('bottom', '-120px');
+          });
           return $reply.find('.oper button[name=send]').click(function() {
-            var content, email, title;
+            var addedDialog, content, dialog, email, title;
             title = $reply.find('input').val();
             content = $reply.find('textarea').val();
             email = $('.dialog-header').data('email');
             if (content === '') {
               return;
             }
+            dialog = {};
+            dialog.subject = title;
+            dialog.type = 'to';
+            dialog.text = content;
+            addedDialog = that.addDialog(dialog);
+            that.clearQuickReply($reply);
             return $.ajax({
               url: '/send',
               dataType: 'json',
@@ -72,11 +81,19 @@
                 return console.log(data);
               },
               error: function(err) {
-                return console.log(err);
+                return that.dialogView.collection.remove(addedDialog);
               }
             });
           });
         });
+      },
+      clearQuickReply: function($reply) {
+        $reply.find('input').val('');
+        $reply.find('textarea').val('');
+        return $reply.css('bottom', '-120px');
+      },
+      addDialog: function(model) {
+        return this.dialogView.collection.add(model);
       }
     });
     return new app;

@@ -341,7 +341,6 @@ button.close:hover{
     min-width: 700px;
 }
 #dialog-list{
-    padding-top: 16px;
     overflow-y: auto;
 }
 .email-dialog article{
@@ -349,7 +348,6 @@ button.close:hover{
 }
 .email-dialog header{
     text-align: center;
-    height: 30px;
 }
 .email-dialog header h3{
     padding: 15px;

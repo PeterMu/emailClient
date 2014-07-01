@@ -4,7 +4,7 @@ define (require, exports, module)->
         default:
             type: 'from'
             subject: ''
-            content: ''
+            text: ''
             contentType: 'text'
     exports.collection = Backbone.Collection.extend
         model: exports.model

@@ -35,12 +35,20 @@ define (require, exports, module) ->
                 $reply = $('.quick-reply')
                 $reply.find('input').focus (e)->
                     $(this).parent().css('bottom','-20px')
+                $reply.find('.oper button[name=hide]').click ()->
+                    $reply.css 'bottom', '-120px'
                 $reply.find('.oper button[name=send]').click ()->
                     title = $reply.find('input').val()
                     content = $reply.find('textarea').val()
                     email = $('.dialog-header').data 'email'
                     if content is ''
                         return
+                    dialog ={}
+                    dialog.subject = title
+                    dialog.type = 'to'
+                    dialog.text = content
+                    addedDialog = that.addDialog dialog
+                    that.clearQuickReply $reply
                     $.ajax
                         url: '/send'
                         dataType: 'json'
@@ -53,7 +61,16 @@ define (require, exports, module) ->
                         success: (data)->
                             console.log data
                         error: (err)->
-                            console.log err
+                            that.dialogView.collection.remove addedDialog
+        clearQuickReply: ($reply)->
+            $reply.find('input').val ''
+            $reply.find('textarea').val ''
+            $reply.css 'bottom', '-120px'
+
+        addDialog: (model)->
+            return this.dialogView.collection.add model
+
+
     new app
 
 

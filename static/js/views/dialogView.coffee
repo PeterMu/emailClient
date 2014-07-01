@@ -5,8 +5,11 @@ define (require,exports, module)->
     Dialog = require '../models/dialog'
 
     dialogItem = Backbone.View.extend
+        initialize: ->
+            this.model.on 'distroy',this.removeDom,this
         events:
             'click .show-more': 'showMore'
+            'click .fa-reply': 'reply'
         template: ()->
             if this.model.get('type') is 'from'
                 return Mustache.render $('#dialog-from-tpl').text(), this.model.toJSON()
@@ -29,6 +32,14 @@ define (require,exports, module)->
             else
                 fa.removeClass('fa-angle-up').addClass('fa-angle-down')
                 this.$('.dialog-article').css 'max-height':'200px'
+        reply: ()->
+            $reply = $('.quick-reply')
+            $reply.css('bottom','-20px')
+            $reply.find('input').val 'Re: ' + this.model.get('subject')
+            $reply.find('textarea').focus()
+        removeDom: ()->
+            this.$el.remove()
+
 
 
     module.exports = Backbone.View.extend
@@ -41,6 +52,8 @@ define (require,exports, module)->
             this.collection.on 'reset',this.renderAll,this
             this.on 'loadDialog', (address)->
                 that.pullData address
+            this.collection.on 'add',this.renderOne, this
+            this.collection.on 'remove',this.removeDialog, this
         renderOne: (model)->
             item = new dialogItem model:model
             this.$el.append item.render().el
@@ -49,6 +62,8 @@ define (require,exports, module)->
             this.collection.each this.renderOne, this
         pullData: (address)->
             this.collection.pull address
+        removeDialog: (model)->
+            model.distroy()
 
 
 

@@ -7,7 +7,7 @@
       "default": {
         type: 'from',
         subject: '',
-        content: '',
+        text: '',
         contentType: 'text'
       }
     });

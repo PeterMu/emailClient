@@ -7,8 +7,12 @@
     Backbone = require('backbone');
     Dialog = require('../models/dialog');
     dialogItem = Backbone.View.extend({
+      initialize: function() {
+        return this.model.on('distroy', this.removeDom, this);
+      },
       events: {
-        'click .show-more': 'showMore'
+        'click .show-more': 'showMore',
+        'click .fa-reply': 'reply'
       },
       template: function() {
         if (this.model.get('type') === 'from') {
@@ -44,6 +48,16 @@
             'max-height': '200px'
           });
         }
+      },
+      reply: function() {
+        var $reply;
+        $reply = $('.quick-reply');
+        $reply.css('bottom', '-20px');
+        $reply.find('input').val('Re: ' + this.model.get('subject'));
+        return $reply.find('textarea').focus();
+      },
+      removeDom: function() {
+        return this.$el.remove();
       }
     });
     return module.exports = Backbone.View.extend({
@@ -56,9 +70,11 @@
         that = this;
         this.collection = new Dialog.collection;
         this.collection.on('reset', this.renderAll, this);
-        return this.on('loadDialog', function(address) {
+        this.on('loadDialog', function(address) {
           return that.pullData(address);
         });
+        this.collection.on('add', this.renderOne, this);
+        return this.collection.on('remove', this.removeDialog, this);
       },
       renderOne: function(model) {
         var item;
@@ -73,6 +89,9 @@
       },
       pullData: function(address) {
         return this.collection.pull(address);
+      },
+      removeDialog: function(model) {
+        return model.distroy();
       }
     });
   });
